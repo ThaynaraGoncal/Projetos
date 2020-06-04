@@ -8,3 +8,8 @@ export const Button = styled(LinearGradient)`
   align-items: center;
   justify-content: center;
 `;
+
+export const Label = styled.Text`
+  font-size: 12px;
+  color: ${({ focused }) => focused ? '#000' : '#fff'};
+`;
