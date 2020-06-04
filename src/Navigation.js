@@ -2,6 +2,8 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign, Ionicons } from '@expo/vector-icons';
 
+import PayButton from './components/PayButton';
+
 import HomeScreen from "./screens/Home";
 import WalletScreen from "./screens/Wallet";
 import PayScreen from "./screens/Pay";
@@ -16,10 +18,6 @@ const icons = {
   Wallet: {
     lib: AntDesign,
     name: 'creditcard',
-  },
-  Pay: {
-    lib: AntDesign,
-    name: 'home',
   },
   Notifications: {
     lib: Ionicons,
@@ -36,12 +34,23 @@ export default function Navigation() {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => {
+          if (route.name === 'Pay') {
+            return <PayButton />
+          }
           const { lib: Icon, name } = icons[route.name];
           return <Icon name={name} size={size} color={color} />;
         },
       })}
+      tabBarOptions={{
+        style: {
+          backgroundColor: '#131418',
+          borderTopColor: 'rgba(255, 255, 255, 0.2)',
+        },
+        activeTintColor: '#fff',
+        inactiveTintColor: '#92929c',
+      }}
     >
-      <Tab.Screen 
+      <Tab.Screen  
         name="Home" 
         component={HomeScreen} 
         options={{
@@ -59,7 +68,7 @@ export default function Navigation() {
         name="Pay" 
         component={PayScreen} 
         options={{
-          title: 'Pagar',
+          title: '',
         }}
         />
 
